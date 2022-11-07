@@ -2,7 +2,6 @@
 #include <functional>
 
 //class B;
-//some changes
 
 class A
 {
