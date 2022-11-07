@@ -3,7 +3,6 @@
 
 //class B;
 //some changes
-//--amend test
 
 class A
 {
