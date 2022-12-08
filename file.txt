@@ -2,14 +2,3 @@ file file
 file file
 row row
 row row
-one
-first
-two
-three
-four
-five
-six
-seven
-eight
-nine
-ten
