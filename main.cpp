@@ -1,10 +1,6 @@
 #include <iostream>
 #include <functional>
 
-#include "style.h"
-
-using namespace RetCtrl;
-
 //class B;
 
 class A
@@ -93,7 +89,7 @@ int main()
     // B b(boo);
     // b.a.fa(666);
     // B b;
-    RetCtrl::Style::SetStyleClass();
+    
     
     return 0;
 }
