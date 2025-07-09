@@ -90,6 +90,7 @@ int main()
     B b;
     b.a->faaf();
     
+    A a(B::foo);
     
     return 0;
 }
