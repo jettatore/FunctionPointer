@@ -86,10 +86,7 @@ void B::foo(int i)
 
 int main()
 {
-    // B b(boo);
-    // b.a.fa(666);
-    // B b;
-    
+    B b;        
     
     return 0;
 }
