@@ -23,13 +23,13 @@ public:
 
     A(std::function<void(int i)>f)
     {
-        std::cout << "ctor\n";
+        std::cout << "ctor: A\n";
         faf = f;
         faf(789);
     }
     
     ~A() {
-        std::cout << "dctor\n";
+        std::cout << "dctor: A\n";
     }
 
     // void(B::*fa)(int i) const;
@@ -86,7 +86,8 @@ void B::foo(int i)
 
 int main()
 {
-    B b;        
+    B b;
+    b.foo(123);
     
     return 0;
 }
