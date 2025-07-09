@@ -88,6 +88,7 @@ void B::foo(int i)
 int main()
 {
     B b;
+    b.a->faaf();
     
     
     return 0;
