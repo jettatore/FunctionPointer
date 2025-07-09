@@ -25,6 +25,7 @@ public:
     {
         std::cout << "ctor: A\n";
         faf = f;
+        f(123);
         faf(789);
     }
     
@@ -88,6 +89,6 @@ int main()
 {
     B b;
     A a(b.foo);
-    
+   
     return 0;
 }
