@@ -87,7 +87,7 @@ void B::foo(int i)
 int main()
 {
     B b;
-    b.foo(123);
+    A a(b.foo);
     
     return 0;
 }
