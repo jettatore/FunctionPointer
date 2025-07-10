@@ -1,96 +1,48 @@
 #include <iostream>
 #include <functional>
 
-//class B;
+void foo(int number)
+{
+    printf("foo: %i\n", number);
+}
+
+void boo()
+{
+    printf("boo!!!\n");
+}
 
 class A
 {
-public:
-    // A(void(*f)(int a))
-    // {
-    //     fa = f;
-    // };
-    // ~A(){};
-
-    // void(*fa)(int a);   
-    
-    // A(void(B::*f)(int i) const, const B & b)
-    // {
-    //     std::cout << "f ";
-    //     fa = f;
-    //     faa(b);
-    // }
-
-    A(std::function<void(int i)>f)
+    public:
+    A(std::function<void(int)> fun)
     {
-        std::cout << "ctor: A\n";
-        faf = f;
-        f(123);
-        faf(789);
-    }
-    
-    ~A() {
-        std::cout << "dctor: A\n";
+        funA = fun;        
     }
 
-    // void(B::*fa)(int i) const;
-    std::function<void(int i)>faf;
-
-    // void faa(const B & obj)
-    // {
-    //     (obj.*fa)(123);
-    // }
-
-    void faaf()
+    void setFun(void(*fun)(int))
     {
-        faf(456);
+        funA = fun;
     }
+
+    void a()
+    {
+        funA(555);
+    }
+
+    private:
+    std::function<void(int)> funA;
 
 };
-
-class B
-{
-public:
-    // B(void(*f)(int a)) : a(f)
-    // {};
-    // B() : a(&B::boo, *this)
-    // {
-        
-    // };
-
-    B()// : a(std::bind(&B::boo, *this, std::placeholders::_1))
-    {
-        std::cout << "+++" << std::endl;
-        a = new A(std::bind(&B::boo, *this, std::placeholders::_1));
-        std::cout << "---" << std::endl;
-    };
-
-    ~B() { delete a; };
-
-    A* a = nullptr;
-
-    static void foo(int i);
-
-private:
-    void boo(int i) const;    
-};
-
-void B::boo(int i) const
-{
-     std::cout << "B::boo: " << i << std::endl;
-}
-
-void B::foo(int i)
-{
-    std::cout << "B::foo, " << i << std::endl;
-}
 
 int main()
 {
-    B b;
-    b.a->faaf();
+    std::function<void(int)>fun;
+    fun = &foo;
+
     
-    A a(B::foo);
-    
-    return 0;
+
+    auto test = std::bind(fun, std::placeholders::_2);
+    test(2, 666);
+
+    return 0;   
 }
