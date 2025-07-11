@@ -1,48 +1,40 @@
 #include <iostream>
-#include <functional>
+
+// #include "A.h"
+#include "B.h"
 
 void foo(int number)
 {
     printf("foo: %i\n", number);
 }
 
-void boo()
+template<typename Func>
+void display(const int *a, size_t n, Func func)
 {
-    printf("boo!!!\n");
+    for(size_t indx = 0; indx < n; ++indx)
+    {
+        printf("%i ", func(a[indx]));
+    }
+    printf("\n");
 }
-
-class A
-{
-    public:
-    A(std::function<void(int)> fun)
-    {
-        funA = fun;        
-    }
-
-    void setFun(void(*fun)(int))
-    {
-        funA = fun;
-    }
-
-    void a()
-    {
-        funA(555);
-    }
-
-    private:
-    std::function<void(int)> funA;
-
-};
 
 int main()
 {
-    std::function<void(int)>fun;
-    fun = &foo;
+    // std::function<void(int)>fun;
+    // fun = &foo;    
 
-    
+    // auto test = std::bind(fun, std::placeholders::_3);
+    // test(1, 2, 3, 4, 5, 6, 7);
 
-    auto test = std::bind(fun, std::placeholders::_2);
-    test(2, 666);
+    // B b;
 
-    return 0;   
+    const size_t n = 5;
+    int a[5] = {1, 2, 3, 4, 5};
+    const size_t factor = 2;
+
+    auto square = std::bind(std::multiplies<int>(), std::placeholders::_1, std::placeholders::_1);
+
+    display(a, n, square);
+
+    return 0;
 }
