@@ -1,100 +1,54 @@
 #include <iostream>
-#include <functional>
+#include <list>
+#include <algorithm>
 
-//class B;
+// #include "A.h"
+#include "B.h"
+#include "SimpleFunctor.h"
+#include "MyFunctor.h"
 
-class A
+void foo(int number)
 {
-public:
-    // A(void(*f)(int a))
-    // {
-    //     fa = f;
-    // };
-    // ~A(){};
-
-    // void(*fa)(int a);   
-    
-    // A(void(B::*f)(int i) const, const B & b)
-    // {
-    //     std::cout << "f ";
-    //     fa = f;
-    //     faa(b);
-    // }
-
-    A(std::function<void(int i)>f)
-    {
-        std::cout << "ctor: A\n";
-        faf = f;
-        f(123);
-        faf(789);
-    }
-    
-    ~A() {
-        std::cout << "dctor: A\n";
-    }
-
-    // void(B::*fa)(int i) const;
-    std::function<void(int i)>faf;
-
-    // void faa(const B & obj)
-    // {
-    //     (obj.*fa)(123);
-    // }
-
-    void faaf()
-    {
-        faf(456);
-    }
-
-};
-
-class B
-{
-public:
-    // B(void(*f)(int a)) : a(f)
-    // {};
-    // B() : a(&B::boo, *this)
-    // {
-        
-    // };
-
-    B()// : a(std::bind(&B::boo, *this, std::placeholders::_1))
-    {
-        std::cout << "+++" << std::endl;
-        a = new A(std::bind(&B::boo, *this, std::placeholders::_1));
-        std::cout << "---" << std::endl;
-    };
-
-    ~B() { delete a; };
-
-    A* a = nullptr;
-
-    static void foo(int i);
-
-private:
-    void boo(int i) const;    
-};
-
-void B::boo(int i) const
-{
-     std::cout << "B::boo: " << i << std::endl;
+    printf("foo: %i\n", number);
 }
 
-void B::foo(int i)
+template<typename Func>
+void display(const int *a, size_t n, Func func)
 {
-    std::cout << "B::foo, " << i << std::endl;
+    for(size_t indx = 0; indx < n; ++indx)
+    {
+        printf("%i ", func(a[indx]));
+    }
+    printf("\n");
 }
 
 int main()
 {
-    B b;
+    // std::function<void(int)>fun;
+    // fun = &foo;    
 
-    A a(b.foo);
-   
+    // auto test = std::bind(fun, std::placeholders::_3);
+    // test(1, 2, 3, 4, 5, 6, 7);
 
-    b.a->faaf();
-    
-    A a(B::foo);
-    
+    // B b;
+
+    // const size_t n = 5;
+    // int a[5] = {1, 2, 3, 4, 5};
+    // const size_t factor = 2;
+
+    // auto square = std::bind(std::multiplies<int>(), std::placeholders::_1, std::placeholders::_1);
+
+    // display(a, n, square);
+
+    // SimpleFunctor simpleFunctor("name");
+    // simpleFunctor();
+    std::list<int> collection = {1, 2, 3, 4, 5, 6, 7, 8};
+    MyFunctor myFunctor;
+    std::for_each(collection.begin(), collection.end(), myFunctor);
+
+    int indx{0};
+    for(const auto &item : collection)
+        printf("%d: %d\n", ++indx, item);
+
     return 0;
 }
